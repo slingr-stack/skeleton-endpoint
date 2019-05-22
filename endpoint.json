@@ -1,0 +1,73 @@
+{
+    "label": "Skeleton",
+    "name": "skeleton",
+    "apiVersion": "v1",
+    "internal": false,
+    "configurationType": "GLOBAL",
+    "deployment": {
+        "profiles":[
+            {
+                "name": "default",
+                "label": "Default",
+                "memory": 256,
+                "description": "Default configuration"
+            }
+        ],
+        "allowMultipleInstances": false
+    },
+    "status": "ACTIVE",
+    "stores": [],
+    "events": [
+        {
+            "label": "Inbound Event",
+            "name": "inboundEvent",
+            "description": "Event send for the endpoint each time that a POST request to the root path of the web service."
+        },
+        {
+            "label": "Pong",
+            "name": "pong",
+            "description": "Callback event for the Ping function"
+        }
+    ],
+    "functions": [
+        {
+            "label": "Random number generator",
+            "name": "randomNumber",
+            "description": "Generates a random integer"
+        },
+        {
+            "label": "Ping",
+            "name": "ping",
+            "description": "The service returns the sent value for the Pong event",
+            "callbacks": [
+                {
+                    "name": "pong",
+                    "maxWaitingTime": 60000,
+                    "maxExpectedResponses": 1
+                }
+            ]
+        },
+        {
+            "label": "Error",
+            "name": "error",
+            "description": "Always throws an exception after to try to execute a method that throws a generic exception."
+        }
+    ],
+    "scripts":[
+        "utils.js"
+    ],
+    "configuration":[
+        {
+            "name": "token",
+            "label": "Token",
+            "description": "Sample token used on endpoint",
+            "type": "text",
+            "required": true
+        },
+        {
+            "name": "webhook",
+            "label": "Web Services URL",
+            "type": "webhookUrl"
+        }
+    ]
+}
